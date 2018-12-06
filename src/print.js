@@ -1,4 +1,3 @@
 export default function print() {
-  console.log(124);
-  onsole.error('i called from print')
+  console.log('only miss the sun only know you love you when let her go  ');
 }

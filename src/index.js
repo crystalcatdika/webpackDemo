@@ -1,10 +1,13 @@
 import './style.css'
 import data from './data.json'
 import pintMe from './print'
+import { cube } from './math'
+
+
+
+
 
 window.onload=function(){
-
-
   const myJsonData = document.createElement("div");
   myJsonData.innerHTML= data.name;
   myJsonData.id = 'ok'
@@ -14,9 +17,21 @@ window.onload=function(){
   btn.onclick = pintMe;
   myJsonData.appendChild(btn)
 
+
+    var mathBtn = document.createElement('button')
+    mathBtn.innerHTML = [
+        'hello webpack',
+        '3 cubed is equal toi' + cube(3)
+    ]
+
+    myJsonData.appendChild(mathBtn)
+
   const myImage= document.createElement("div");
   myImage.id= 'myImage';
   myJsonData.appendChild(myImage)
+
+
+
 
   if (!document.getElementById("myCanvas")) {
     var width = "";
@@ -107,4 +122,20 @@ window.onload=function(){
     ctx.restore();
   }
 
+};
+
+
+if (module.hot) {
+  module.hot.accept('./print.js', function () {
+      console.log('Accepting>>>>>>>>>>>>');
+      pintMe();
+      myJsonData.removeChild(btn)
+      let btn = document.createElement('button')
+      btn.innerHTML = '点击again'
+      btn.onclick = pintMe;
+      myJsonData.appendChild(btn)
+  })
+
 }
+
+

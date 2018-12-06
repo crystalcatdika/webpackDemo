@@ -26,7 +26,8 @@ html,body {
 }
 
 #myImage {
-    width:600px;
-    height:600px;
-    background: url("./image/xixi.jpg");
+    width:60px;
+    height:60px;
+    background: url("./image/xixi.jpg") no-repeat;
+    background-size: contain;
 }
