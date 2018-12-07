@@ -3,11 +3,11 @@ import data from './data.json'
 import pintMe from './print'
 import { cube } from './math'
 
-
-
-
-
 window.onload=function(){
+
+  const testbabel = () => console.log(1248);
+  testbabel();
+
   const myJsonData = document.createElement("div");
   myJsonData.innerHTML= data.name;
   myJsonData.id = 'ok'
@@ -21,7 +21,7 @@ window.onload=function(){
     var mathBtn = document.createElement('button')
     mathBtn.innerHTML = [
         'hello webpack',
-        '3 cubed is equal toi' + cube(3)
+        '8 cubed is equal toi' + cube(8)
     ]
 
     myJsonData.appendChild(mathBtn)
@@ -123,19 +123,5 @@ window.onload=function(){
   }
 
 };
-
-
-if (module.hot) {
-  module.hot.accept('./print.js', function () {
-      console.log('Accepting>>>>>>>>>>>>');
-      pintMe();
-      myJsonData.removeChild(btn)
-      let btn = document.createElement('button')
-      btn.innerHTML = '点击again'
-      btn.onclick = pintMe;
-      myJsonData.appendChild(btn)
-  })
-
-}
 
 
