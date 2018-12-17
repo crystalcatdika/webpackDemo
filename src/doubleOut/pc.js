@@ -1,6 +1,6 @@
-import { cube } from './math'
-import pintMe from './print'
-import data from './data.json'
+import { cube } from '../math'
+import pintMe from '../print'
+import data from '../data.json'
 
 window.onload=function(){
 
