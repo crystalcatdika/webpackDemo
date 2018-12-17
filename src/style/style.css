@@ -31,3 +31,8 @@ html,body {
     background: url("../image/xixi.jpg") no-repeat;
     background-size: contain;
 }
+
+#envImage {
+    width:60px;
+    height:60px;
+}

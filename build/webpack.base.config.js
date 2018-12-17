@@ -1,4 +1,6 @@
 const path = require('path');
+const NEVCON = require('../config');
+const webpack =require('webpack');
 
 module.exports = {
     output: {
@@ -29,5 +31,10 @@ module.exports = {
                 ]
             }
         ],
-    }
+    },
+    plugins: [
+      new webpack.DefinePlugin({
+        NEVCONFIG: JSON.stringify(NEVCON),
+      }),
+    ],
 };

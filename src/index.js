@@ -4,7 +4,7 @@ import data from './data.json'
 
 window.onload=function(){
 
-  const testbabel = () => console.log(1248);
+  const testbabel = () => console.log('引入成功');
   testbabel();
 
   const myJsonData = document.createElement("div");
@@ -28,4 +28,9 @@ window.onload=function(){
   const myImage= document.createElement("div");
   myImage.id= 'myImage';
   myJsonData.appendChild(myImage)
+
+  const envImage= document.createElement("div");
+  envImage.id= 'envImage';
+  envImage.innerHTML = `${NEVCONFIG.ENVTEST}`
+  myJsonData.appendChild(envImage)
 }
