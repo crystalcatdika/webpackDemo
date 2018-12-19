@@ -8,10 +8,11 @@ module.exports = merge(baseConfig, {
 		app:'./src/index.js',
 	},
 	mode: 'development',
-	devtool: 'inline-source-map',
+	devtool: 'source-map',
 	devServer: {
 		contentBase: './dist',
 		hot: true,
+		port: 7200,
 	},
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),

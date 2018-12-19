@@ -6,6 +6,8 @@ window.onload=function(){
 
 	const testbabel = () => console.log('引入成功');
 	testbabel();
+	const babelList = [1,2,3].map((n) => n+1);
+	console.log(babelList);
 
 	const myJsonData = document.createElement('div');
 	myJsonData.innerHTML = data.name;
@@ -20,7 +22,7 @@ window.onload=function(){
 	const mathBtn = document.createElement('button');
 	mathBtn.innerHTML = [
 		'hello webpack',
-		`8 cubed is equal toi${cube(8)}`,
+		`2 cubed is equal toi${cube(2)}`,
 	];
 
 	myJsonData.appendChild(mathBtn);

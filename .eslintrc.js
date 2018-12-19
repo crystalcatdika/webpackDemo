@@ -5,6 +5,7 @@ module.exports = {
         "node": true
     },
     "extends": ['airbnb-base', 'eslint:recommended'],
+    "parser": "babel-eslint",
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -25,6 +26,7 @@ module.exports = {
         "import/no-dynamic-require": "off",
         "no-unused-vars": "off",
         'import/no-extraneous-dependencies': "off",
+        'global-require': 'off',
         "linebreak-style": [
             "error",
             "unix"
