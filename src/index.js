@@ -4,10 +4,10 @@ import data from './data.json';
 
 window.onload=function(){
 
-	const testbabel = () => console.log('引入成功');
-	testbabel();
-	const babelList = [1,2,3].map((n) => n+1);
-	console.log(babelList);
+	// const testbabel = () => console.log('引入成功');
+	// testbabel();
+	// const babelList = [1,2,3].map((n) => n+1);
+	// console.log(babelList);
 
 	const myJsonData = document.createElement('div');
 	myJsonData.innerHTML = data.name;

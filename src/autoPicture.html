@@ -1,0 +1,61 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title></title>
+	<style type="text/css">
+		body, div, p, button{
+			margin: 0;
+			padding: 0;
+		}
+		/*html,body{*/
+			/*width:100%;*/
+			/*height:100%;*/
+		/*}*/
+
+		.content{
+			width:100%;
+			height: 100%;
+			position: relative;
+			overflow-x: hidden;
+			overflow-y: auto;
+		}
+		.backImg{
+			width:100%;
+		}
+		.qrcode{
+			position:absolute;
+			top: 12.53rem;
+			/* 统一 / 37.5*/
+			left: 0.266rem;
+			height: 4.3rem;
+		}
+	</style>
+</head>
+
+<body>
+<div class="content" >
+	<img
+			class="backImg"
+			src="./image/abc.jpg"
+			alt=""
+	>
+	<img
+			style="width: 160px;"
+			class="qrcode"
+			src="http://cdn-img-test.weidiango.com/FswzE_HW3QM_lfTB0rzygMVG1GuY?x-oss-process=image/resize,m_lfit,w_300,h_300/crop,w_300,h_300,g_center"
+			alt=""
+	>
+</div>
+</body>
+<script>
+  document.getElementsByTagName('html')[0].style.fontSize = window.innerWidth / 10 + 'px';
+  // document.getElementsByClassName('html')[0].style.fontSize = window.innerWidth / 10 + 'px';
+  var qrcode = document.getElementsByClassName("qrcode")[0];
+  var qrRem = Number(qrcode.style.width.slice(0,-2))/37.5;
+
+  qrcode.style.width = qrRem + 'rem'
+
+
+</script>
+</html>
