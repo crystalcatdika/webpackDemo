@@ -1,4 +1,4 @@
-import '../style/style.css';
+import '../style/index.css';
 
 window.onload=function(){
 	if (!document.getElementById('myCanvas')) {

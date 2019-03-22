@@ -1,11 +1,8 @@
 import { cube } from '../math';
 import pintMe from '../print';
-import data from '../data.json';
+import data from '../assets/data.json';
 
 window.onload=function(){
-
-	const testbabel = () => console.log(1248);
-	testbabel();
 
 	const myJsonData = document.createElement('div');
 	myJsonData.innerHTML= data.name;

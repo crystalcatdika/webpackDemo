@@ -4,6 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const baseConfig = require('./webpack.base.config');
 
+function resolve(dir) {
+	return path.join(__dirname, '..', dir);
+}
+
 module.exports = merge(baseConfig, {
 	entry: {
 		pc: './src/doubleOut/pc.js',
@@ -15,15 +19,17 @@ module.exports = merge(baseConfig, {
 	},
 	mode: 'production',
 	plugins: [
-		new CleanWebpackPlugin(['dist']),
+		new CleanWebpackPlugin(['dist'], {
+			root: resolve(''),
+		}),
 		new HtmlWebpackPlugin({
-			filename: path.join(__dirname, 'dist', 'pc.html'),
+			filename: path.join(resolve(''), 'dist', 'pc.html'),
 			template: 'src/doubleOut/pc.html',
 			inject: true,
 			chunks: ['pc'],
 		}),
 		new HtmlWebpackPlugin({
-			filename: path.join(__dirname, 'dist', 'mobile.html'),
+			filename: path.join(resolve(''), 'dist', 'mobile.html'),
 			template: 'src/doubleOut/mobile.html',
 			inject: true,
 			chunks: ['mobile'],

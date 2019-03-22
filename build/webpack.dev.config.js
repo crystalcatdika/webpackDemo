@@ -10,7 +10,8 @@ module.exports = merge(baseConfig, {
 	mode: 'development',
 	devtool: 'source-map',
 	devServer: {
-		contentBase: './dist',
+		// index.html 位置
+		contentBase: './src',
 		hot: true,
 	},
 	plugins: [

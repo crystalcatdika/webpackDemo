@@ -1,7 +1,12 @@
+const path = require('path');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const baseConfig = require('./webpack.base.config');
+
+function resolve(dir) {
+	return path.join(__dirname, '..', dir);
+}
 
 module.exports = merge(baseConfig, {
 	entry: {
@@ -20,7 +25,9 @@ module.exports = merge(baseConfig, {
 		},
 	},
 	plugins: [
-		new CleanWebpackPlugin(['dist']),
+		new CleanWebpackPlugin(['dist'], {
+			root: resolve(''),
+		}),
 		new HtmlWebpackPlugin({
 			title: 'webpackDemo',
 			filename: 'index.html',
