@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ENV=develepment webpack-dev-server --config ./build/webpack.dev.config.js",
+    "node": "NODE_ENV=development PORT=9000 node ./app.js",
+    "start": "ENV=develepment PORT=8688 webpack-dev-server --config ./build/webpack.dev.config.js",
     "build": "ENV=production webpack --config ./build/webpack.prod.config.js",
     "build:index": "ENV=production webpack --config ./build/webpack.index.config.js",
     "eLint": "eslint --format node_modules/eslint-formatter-friendly --ext .js,.jsx src config"
@@ -15,7 +16,10 @@
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
-    "qrcode": "^1.3.3"
+    "axios": "^0.18.0",
+    "multiparty": "^4.2.1",
+    "qrcode": "^1.3.3",
+    "xlsx": "^0.14.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.0",

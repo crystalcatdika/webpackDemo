@@ -1,12 +1,13 @@
 import QR from 'qrcode';
 
-function createImageDataSrc(url) {
+function createImageDataSrc(item) {
 	return new Promise((resolve, reject) => {
 		const result = {
 			pngQrSrc: null,
 			jpgQrSrc: null,
 		};
-		QR.toCanvas(url, { errorCorrectionLevel: 'm' }, (err, canvas) => {
+		QR.toCanvas(item.detail, { errorCorrectionLevel: 'm', width: 100,
+			height: 100,}, (err, canvas) => {
 			if (err) {
 				reject(err);
 			} else {

@@ -1,7 +1,13 @@
+const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const baseConfig = require('./webpack.base.config');
+
+const PORT = parseInt(process.env.PORT) || 8688;
+function resolve(dir) {
+	return path.join(__dirname, '..', dir);
+}
 
 module.exports = merge(baseConfig, {
 	entry: {
@@ -11,8 +17,15 @@ module.exports = merge(baseConfig, {
 	devtool: 'source-map',
 	devServer: {
 		// index.html 位置
-		contentBase: './src',
+		// host: '0.0.0.0',
+		port: PORT,
+		contentBase: resolve('dist'),
 		hot: true,
+		proxy: {
+			'/api': {
+				target: 'http://localhost:9000',
+			},
+		},
 	},
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),
