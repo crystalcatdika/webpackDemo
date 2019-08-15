@@ -31,7 +31,6 @@ const createBatchQr = (data) => {
 	const getQrPromises = data.map((item) => {
 		return createImageDataSrc(item)
 			.catch((err) => {
-				console.log(err);
 				return { error: true };
 			})
 			.then((result) => {
@@ -40,7 +39,6 @@ const createBatchQr = (data) => {
 	});
 	return Promise.all(getQrPromises)
 		.then((qrData) => {
-			console.log(qrData);
 			if (!qrData.find((item) => item.error)) {
 				const pngQr1 = document.getElementsByClassName('pngQr')[0];
 				const pngQr2 = document.getElementsByClassName('pngQr')[1];

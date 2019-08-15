@@ -1,20 +1,39 @@
 const express = require('express');
-
-const app = express();
-
-const port = process.env.PORT || 8080;
-
-app.listen(port);
-
-const router = express.Router();
-
-
+const log4js = require('log4js');
 const path = require('path');
 const multiparty = require('multiparty');
 const excel = require('./server/helper/excel');
 
+
 const uploadPath = path.join(__dirname, 'upload');
 
+log4js.configure({
+	appenders: {
+		stdout: { type: 'stdout'},
+		http: { type: 'file', filename: './log/http.log' },
+	},
+	categories: {
+		default: { appenders: ['stdout'], level: 'debug' },
+		http: { appenders: ['http', 'stdout'], level: 'info'}
+	}
+});
+const logger = log4js.getLogger();
+const loggerHttp = log4js.getLogger('http');
+
+
+const app = express();
+const router = express.Router();
+
+
+const { PORT, NODE_ENV} = process.env;
+app.listen(PORT, function () {
+	logger.info(`Express server listening on port ${PORT} ${NODE_ENV}`);
+});
+
+app.use(log4js.connectLogger(loggerHttp, { level: 'auto' }));
+
+
+app.use('/api', router);
 
 router.post('/home/geBatchQr', (req, res, next) => {
 	let timeRange;
@@ -42,7 +61,3 @@ router.post('/home/geBatchQr', (req, res, next) => {
 // router.get('/', function(req, res) {
 // 	res.send('<h1>Hello World</h1>');
 // });
-
-app.use('/api', router);
-
-console.log('node already open on ' + port);
