@@ -41,11 +41,11 @@ const createBatchQr = (data) => {
 		.then((qrData) => {
 			if (!qrData.find((item) => item.error)) {
 				const pngQr1 = document.getElementsByClassName('pngQr')[0];
-				const pngQr2 = document.getElementsByClassName('pngQr')[1];
-				const pngQr3 = document.getElementsByClassName('pngQr')[2];
+				// const pngQr2 = document.getElementsByClassName('pngQr')[1];
+				// const pngQr3 = document.getElementsByClassName('pngQr')[2];
 				pngQr1.src = qrData[0].pngQrSrc;
-				pngQr2.src = qrData[1].pngQrSrc;
-				pngQr3.src = qrData[2].pngQrSrc;
+				// pngQr2.src = qrData[1].pngQrSrc;
+				// pngQr3.src = qrData[2].pngQrSrc;
 			}
 		});
 };

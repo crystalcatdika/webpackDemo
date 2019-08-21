@@ -1,63 +1,34 @@
-const express = require('express');
-const log4js = require('log4js');
-const path = require('path');
-const multiparty = require('multiparty');
-const excel = require('./server/helper/excel');
 
+const errLogger = (msg) => {
+	console.error(`${new Date()}\t${msg}`);
+};
 
-const uploadPath = path.join(__dirname, 'upload');
+// ---------------Init express---------------
+const server = require('./server');
 
-log4js.configure({
-	appenders: {
-		stdout: { type: 'stdout'},
-		http: { type: 'file', filename: './log/http.log' },
-	},
-	categories: {
-		default: { appenders: ['stdout'], level: 'debug' },
-		http: { appenders: ['http', 'stdout'], level: 'info'}
+process.on('uncaughtException', (err) => {
+	errLogger(`Process crashed.\n${err.message}`);
+	// console.log('端口冲突，给定地址已被占用');
+	if (err.code === 'EADDRINUSE') {
+		process.exit(1);
+	} else {
+		// remoteLogger.logProcess({
+		// 	message: err.message,
+		// 	stack: err.stack,
+		// });
 	}
 });
-const logger = log4js.getLogger();
-const loggerHttp = log4js.getLogger('http');
 
-
-const app = express();
-const router = express.Router();
-
-
-const { PORT, NODE_ENV} = process.env;
-app.listen(PORT, function () {
-	logger.info(`Express server listening on port ${PORT} ${NODE_ENV}`);
+process.on('SIGINT', () => {
+	Promise
+		.all([
+			server.close(),
+		])
+		.then(() => server.closeLog())
+		.catch((err) => {
+			errLogger(`Server shutdown with error.${err.message}`);
+		})
+		.then(() => {
+			process.exit();
+		});
 });
-
-app.use(log4js.connectLogger(loggerHttp, { level: 'auto' }));
-
-
-app.use('/api', router);
-
-router.post('/home/geBatchQr', (req, res, next) => {
-	let timeRange;
-	const form = new multiparty.Form({
-		autoFiles: true,
-		uploadDir: uploadPath,
-	});
-
-	form.on('error', (err) => {
-		next(err);
-	});
-
-	form.on('field', (time, value) => {
-		timeRange = JSON.parse(value);
-	});
-
-	form.on('file', (name, file) => {
-		const data = excel.parse(file.path);
-		res.send({data});
-	});
-
-	form.parse(req);
-});
-
-// router.get('/', function(req, res) {
-// 	res.send('<h1>Hello World</h1>');
-// });
