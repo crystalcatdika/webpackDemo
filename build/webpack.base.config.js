@@ -2,8 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 const NEVCON = require('../config');
 
+// dist生成在root
 function resolve(dir) {
-	return path.join(__dirname, dir);
+	return path.join(__dirname, `../${dir}`);
 }
 
 module.exports = {
@@ -33,9 +34,26 @@ module.exports = {
             ['style-loader', 'css-loader'],
 			},
 			{
-				test: /\.(png|svg|jpg|gif)$/,
+				test: /\.html$/,
 				use: [
-					'file-loader'
+					{
+						loader: 'html-loader',
+						options: {
+							minimize: true,
+						},
+					},
+				],
+			},
+			{
+				test: /\.(png|svg|jpg|gif)$/,
+				use: [{
+					loader: 'file-loader',
+					options: {
+						name: '[name].[ext]',
+						publicPath: './images/',
+						outputPath: './images/'
+					}
+				}
 				]
 			}
 		],

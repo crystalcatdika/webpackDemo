@@ -1,0 +1,29 @@
+body, div, p, button{
+    margin: 0;
+    padding: 0;
+}
+html,body{
+    width:100%;
+    height:100%;
+}
+
+/*图片建议比例 375*2 : 667*2 自适应铺满所有屏幕*/
+/*比例不对，width:100%，height: auto, 图片不变形*/
+.content{
+    width:100%;
+    height: 100%;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.backImg{
+    width:100%;
+}
+/*.qrcode{*/
+/*position:absolute;*/
+/*top: 12.53rem;*/
+/*left: 0.266rem;*/
+/*width: 4.3rem;*/
+/*height: 4.3rem;*/
+/*}*/
+
