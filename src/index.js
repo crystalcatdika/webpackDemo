@@ -39,14 +39,13 @@ const createBatchQr = (data) => {
 	});
 	return Promise.all(getQrPromises)
 		.then((qrData) => {
-			if (!qrData.find((item) => item.error)) {
-				const pngQr1 = document.getElementsByClassName('pngQr')[0];
-				// const pngQr2 = document.getElementsByClassName('pngQr')[1];
-				// const pngQr3 = document.getElementsByClassName('pngQr')[2];
-				pngQr1.src = qrData[0].pngQrSrc;
-				// pngQr2.src = qrData[1].pngQrSrc;
-				// pngQr3.src = qrData[2].pngQrSrc;
-			}
+			const useableQrcode = qrData.filter((item) => !item.error);
+			const pngQr1 = document.getElementsByClassName('qrcodeBox')[0];
+			useableQrcode.forEach((item) => {
+				const img = document.createElement('img');
+				img.src=item.pngQrSrc;
+				pngQr1.appendChild(img);
+			});
 		});
 };
 

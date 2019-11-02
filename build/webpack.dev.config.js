@@ -19,7 +19,7 @@ module.exports = merge(baseConfig, {
 		// index.html 位置
 		// host: '0.0.0.0',
 		port: PORT,
-		contentBase: resolve('dist'),
+		contentBase: resolve('/static'),
 		hot: true,
 		proxy: {
 			'/api': {
