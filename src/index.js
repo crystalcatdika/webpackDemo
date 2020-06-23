@@ -56,9 +56,8 @@ oBtn.addEventListener('click', () => {
 	const files = oFile.files;
 	const formData = new FormData();
 	for(let i = 0; i<files.length; i++) {
-		formData.append(`${i}`, files[i]);
+		formData.append('file', files[i]);
 	}
-	formData.append('dasf', files);
 	api
 		.sendFiles({
 			formData,
