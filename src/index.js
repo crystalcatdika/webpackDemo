@@ -50,9 +50,28 @@ const createBatchQr = (data) => {
 };
 
 
-
-
-
+const oFile = document.getElementById('file');
+const oBtn = document.getElementById('btn');
+oBtn.addEventListener('click', () => {
+	const files = oFile.files;
+	const formData = new FormData();
+	for(let i = 0; i<files.length; i++) {
+		formData.append(`${i}`, files[i]);
+	}
+	formData.append('dasf', files);
+	api
+		.sendFiles({
+			formData,
+		})
+		.then((data) => {
+			console.log(data);
+		// alert('上传Excel成功');
+		})
+		.catch((err) => {
+			throw err;
+		// alert('上传Excel失败');
+		});
+});
 
 
 
