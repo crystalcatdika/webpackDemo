@@ -10,20 +10,20 @@ const excel = require('./helper/excel');
 const { PATH } = require('../config');
 
 
-const uploadPath = path.join(__dirname,'..', 'upload');
+const uploadPath = path.join(__dirname, '..', 'upload');
 
 log4js.configure({
 	appenders: {
-		stdout: { type: 'stdout'},
+		stdout: { type: 'stdout' },
 		http: { type: 'file', filename: './log/http.log' },
 		request: { type: 'dateFile', pattern: '-dd-hh.log', filename: './log/request.log' },
 		error: { type: 'dateFile', pattern: '-dd-hh.log', filename: './log/error.log' },
 	},
 	categories: {
 		default: { appenders: ['stdout'], level: 'debug' },
-		http: { appenders: ['http', 'stdout'], level: 'info'},
-		request: { appenders: ['request', 'stdout'], level: 'info'},
-		error: { appenders: ['error', 'stdout'], level: 'error'},
+		http: { appenders: ['http', 'stdout'], level: 'info' },
+		request: { appenders: ['request', 'stdout'], level: 'info' },
+		error: { appenders: ['error', 'stdout'], level: 'error' },
 	}
 });
 const logger = log4js.getLogger();
@@ -46,7 +46,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 const router = express.Router();
-const { PORT, NODE_ENV} = process.env;
+const { PORT, NODE_ENV } = process.env;
 
 // webpack 反向代理 proxy 端口9000， node 环境配置 PORT 保持一致用9000
 const server = app.listen(PORT, function () {
@@ -101,10 +101,10 @@ router.post('/home/geBatchQr', (req, res, next) => {
 	});
 
 	form.on('file', (name, file) => {
-		const data = excel.parse(file.path);	
+		const data = excel.parse(file.path);
 		Promise.resolve()
 			.then(() => {
-				res.send({data});
+				res.send({ data });
 			})
 			.then(() => {
 				unlinkFile(file.path);
@@ -122,9 +122,9 @@ router.post('/home/sendFiles', (req, res, next) => {
 	var form = new multiparty.Form();
 	form.encoding = 'utf-8';
 
-	form.parse(req, function(err, fields, files) {
-		if(err){
-			console.log(err);
+	form.parse(req, function (err, fields, files) {
+		if (err) {
+			throw err;
 		}
 		// multipart/form-data：既可以上传文件等二进制数据，也可以上传表单键值对，只是最后会转化为一条信息；
 		// formData 键值对传值时，注意一个文件对应一个键值对。
@@ -134,7 +134,7 @@ router.post('/home/sendFiles', (req, res, next) => {
 			fs.readFile(item.path, (err, data) => {
 				const baseData = data.toString('base64');
 				pictureList.push(`data:image/jpeg;base64,${baseData}`);
-				unlinkFile(item.path);
+				unlinkFile(item.path, (err) => { if(err){ throw err; }});
 			});
 		});
 		console.log(pictureList);
