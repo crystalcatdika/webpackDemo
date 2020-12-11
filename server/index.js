@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const log4js = require('log4js');
 const path = require('path');
 const multiparty = require('multiparty');
+const unlinkFile = require('fs').unlink;
 const excel = require('./helper/excel');
 const { PATH } = require('../config');
 
@@ -98,8 +99,15 @@ router.post('/home/geBatchQr', (req, res, next) => {
 	});
 
 	form.on('file', (name, file) => {
-		const data = excel.parse(file.path);
-		res.send({data});
+		const data = excel.parse(file.path);	
+		Promise.resolve()
+			.then(() => {
+				res.send({data});
+			})
+			.then(() => {
+				unlinkFile(file.path);
+			})
+			.catch(next);
 	});
 
 	form.parse(req);
