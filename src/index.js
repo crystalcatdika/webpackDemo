@@ -17,11 +17,9 @@ batchBtn.addEventListener('click', () => {
 			})
 			.then(({data}) => {
 				return createBatchQr(data);
-				// alert('上传Excel成功');
 			})
 			.catch((err) => {
 				throw err;
-				// alert('上传Excel失败');
 			});
 	};
 });
